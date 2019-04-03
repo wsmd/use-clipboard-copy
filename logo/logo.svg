@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="b" x1="50%" x2="51.07%" y1="100%" y2="0%">
+      <stop offset="0%" stop-color="#9FFF9B"/>
+      <stop offset="95.11%" stop-color="#61E7B5"/>
+      <stop offset="100%" stop-color="#49DFBF"/>
+    </linearGradient>
+    <path id="a" d="M73.5 96c-3.92-3.36-6.44-7.76-6.47-12.98v-13.5L70.5 81.5l12.5-2c.5 0 1.04-.35 1.5-1 .03-.46-.08-1.1-.5-1.5L55.43 46.62c-.27-.37-.7-.45-1-.5-.46.36-.7.73-.5 1v35.5c-.21 14.8 7.98 25.42 24.5 31.35.54.02.93.55 1 1-.24.68-.77 1.07-1.5 1h-34C35.88 116 28.8 109.58 28 101.5c-3.93-45.97-5.93-71.22-5.99-75.75-.09-6.3 4.79-13.03 11.56-13.7h60.5c6.22.58 11.97 7.64 11.9 13.7v58c-.07 4.9-2.55 9.2-5.97 12.25a16.89 16.89 0 0 1-13 5c-5 .48-10-1.32-13.5-5z"/>
+    <path id="d" d="M0 0h63.5a6.82 6.82 0 0 0-6.75 5.9l-.91 6.68a7.7 7.7 0 0 1-6.7 6.6c-4.22.53-10.1.79-17.64.79-7.69 0-13.62-.27-17.8-.82a7.7 7.7 0 0 1-6.55-6.08l-1.8-8.7A5.47 5.47 0 0 0 0 0z"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <path fill="#7EF9A7" fill-opacity=".4" d="M66.97 69.76v12.28l16.76-2.65c.5-.06 1.09-1.28.64-1.48l-17.4-8.15z"/>
+    <mask id="c" fill="#fff">
+      <use xlink:href="#a"/>
+    </mask>
+    <use fill="url(#b)" xlink:href="#a"/>
+    <g mask="url(#c)">
+      <g transform="translate(32.5 12)">
+        <mask id="e" fill="#fff">
+          <use xlink:href="#d"/>
+        </mask>
+        <use fill="#BEFFDC" xlink:href="#d"/>
+        <path fill="#CAFFE3" d="M1.03 1.78h64.8v1.29H1.03V1.78zm6.8 16.19h47v2h-47v-2z" mask="url(#e)"/>
+        <path fill="#DEFFED" d="M1.03.04h64.8v2H1.03z" mask="url(#e)"/>
+        <path fill="#B6FFD7" d="M1.03 15.14h64.8v2.31H1.03z" mask="url(#e)" opacity=".45"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,58 @@
+{
+  "name": "use-clipboard-copy",
+  "version": "0.0.1",
+  "description": "React hook to copy text to clipboard",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": "wsmd/use-clipboard-copy",
+  "homepage": "https://github.com/wsmd/use-clipboard-copy",
+  "bugs": {
+    "url": "https://github.com/wsmd/use-clipboard-copy/issues"
+  },
+  "author": "Waseem Dahman <dwaseem@icloud.com>",
+  "license": "MIT",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "tslint --project .",
+    "test": "jest",
+    "build": "tsc",
+    "prebuild": "rm -rf dist",
+    "prepack": "yarn typecheck && yarn lint && yarn test"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "react",
+    "react-hooks",
+    "copy-to-clipboard",
+    "clipboard-js",
+    "copy",
+    "cut",
+    "hook"
+  ],
+  "prettier": {
+    "trailingComma": "all",
+    "singleQuote": true
+  },
+  "jest": {
+    "watchPathIgnorePatterns": [
+      "dist"
+    ]
+  },
+  "peerDependencies": {
+    "react": "^16.8.0"
+  },
+  "dependencies": {
+    "clipboard-copy": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "@types/react": "^16.8.10",
+    "jest": "^24.7.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "tslint": "^5.15.0",
+    "typescript": "^3.4.1"
+  }
+}
