@@ -1,7 +1,7 @@
 {
   "name": "use-clipboard-copy",
   "version": "0.0.1",
-  "description": "React hook to copy text to clipboard",
+  "description": "Lightweight copy to clipboard hook for React",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "wsmd/use-clipboard-copy",
