@@ -22,7 +22,8 @@
 
 - [Getting Started](#getting-started)
 - [Examples](#examples)
-  - [Copy Text from Another Element](#copy-text-from-another-element)
+  - [Copy Text of Another Element](#copy-text-of-another-element)
+  - [Copy Text Without an Element](#copy-text-without-an-element)
 - [License](#license)
 
 </p>
@@ -42,19 +43,35 @@ Please note that `use-clipboard-copy` requires `react@^16.8.0` as a peer depende
 
 ## Examples
 
-### Copy Text from Another Element
+### Copy Text of Another Element
 
+```jsx
+import { useClipboard } from 'use-clipboard-copy';
+
+export default function SharePublicURL({ url }) {
+  const clipboard = useClipboard();
+  return (
+    <div>
+      <input {...clipboard.target()} value={url} readOnly />
+      <button {...clipboard.trigger()}>Copy Shareable Link</button>
+    </div>
+  );
+}
+```
+
+### Copy Text Without an Element
+
+<!-- prettier-ignore -->
 ```jsx
 import { useClipboard } from 'use-clipboard-copy';
 
 export default function CopyTextComponent({ value }) {
   const clipboard = useClipboard();
   return (
-    <div>
-      <input {...clipboard.target()} value="Hello, World!" readOnly />
-      <button {...clipboard.trigger()}>Copy Text</button>
-    </div>
-  );
+    <button onClick={() => clipboard.copy('Hello, World!')}>
+      Copy "Hello, World"
+    </button>
+  )
 }
 ```
 
