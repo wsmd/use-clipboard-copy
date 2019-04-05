@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://user-images.githubusercontent.com/2100222/55518572-858dbe00-5642-11e9-8340-b4f58bf0385e.png" width="128">
+  <img src="https://user-images.githubusercontent.com/2100222/55596467-9c054980-5716-11e9-8723-b8c286fcd9e3.png" width="128">
   <br>
   use-clipboard-copy
 </h1>
