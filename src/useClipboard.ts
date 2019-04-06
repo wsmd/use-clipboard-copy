@@ -4,15 +4,23 @@ import { useCallback, useMemo, useRef } from 'react';
 import { useTimedToggle } from './useTimedToggle';
 
 interface UseClipboardOptions {
+  copiedTimeout?: number;
   onSuccess?: () => void;
   onError?: () => void;
-  copiedTimeout?: number;
+}
+
+interface ClipboardAPI {
+  copied: boolean;
+  copy: (text?: string) => void;
+  target: React.MutableRefObject<
+    HTMLInputElement | HTMLTextAreaElement | undefined
+  >;
 }
 
 export function useClipboard(options: UseClipboardOptions = {}) {
   const [copied, toggleCopied] = useTimedToggle(false);
 
-  const targetRef = useRef<HTMLInputElement | HTMLTextAreaElement>();
+  const targetRef = useRef<HTMLTextAreaElement | HTMLInputElement>(null);
 
   const handleCopy = useCallback((text: string) => {
     copy(text)
@@ -31,7 +39,7 @@ export function useClipboard(options: UseClipboardOptions = {}) {
       });
   }, []);
 
-  const copyHandler = useCallback((text: string) => {
+  const copyHandler = useCallback((text?: string | React.SyntheticEvent) => {
     if (typeof text !== 'string') {
       if (targetRef.current) {
         handleCopy(targetRef.current.value);
@@ -44,6 +52,6 @@ export function useClipboard(options: UseClipboardOptions = {}) {
   return {
     copied,
     copy: copyHandler,
-    target: targetRef,
+    target: targetRef as React.RefObject<any>,
   };
 }
