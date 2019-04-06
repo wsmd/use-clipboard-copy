@@ -10,7 +10,7 @@ export function useTimedToggle(
   const toggleValue = (timeout: number) => {
     clearTimeout(timeoutRef.current);
     setValue(!initialValueRef.current);
-    timeoutRef.current = setTimeout(
+    timeoutRef.current = window.setTimeout(
       () => setValue(initialValueRef.current),
       timeout,
     );

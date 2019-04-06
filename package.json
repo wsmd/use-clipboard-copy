@@ -15,10 +15,11 @@
     "typecheck": "tsc --noEmit",
     "lint": "tslint --project .",
     "test": "jest",
-    "test:all": "yarn typecheck && yarn lint && yarn test",
+    "test:all": "yarn typecheck && yarn lint && yarn test && yarn size",
     "build": "tsc",
     "prebuild": "rm -rf dist",
-    "prepack": "yarn test:all && yarn build"
+    "prepack": "yarn test:all && yarn build",
+    "size": "yarn build --skipLibCheck && size-limit"
   },
   "files": [
     "dist"
@@ -41,6 +42,12 @@
       "dist"
     ]
   },
+  "size-limit": [
+    {
+      "path": "dist/*.js",
+      "limit": "800 B"
+    }
+  ],
   "peerDependencies": {
     "react": "^16.8.0"
   },
@@ -53,6 +60,7 @@
     "jest": "^24.7.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "size-limit": "^1.0.1",
     "tslint": "^5.15.0",
     "typescript": "^3.4.1"
   }
