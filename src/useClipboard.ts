@@ -6,19 +6,19 @@ import { useTimedToggle } from './useTimedToggle';
 interface UseClipboardOptions {
   onSuccess?: () => void;
   onError?: () => void;
-  copiedStateTimeout?: number;
+  copiedTimeout?: number;
 }
 
 export function useClipboard(options: UseClipboardOptions = {}) {
   const [copied, toggleCopied] = useTimedToggle(false);
 
-  const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>();
+  const targetRef = useRef<HTMLInputElement | HTMLTextAreaElement>();
 
   const handleCopy = useCallback((text: string) => {
     copy(text)
       .then(() => {
-        if (options.copiedStateTimeout) {
-          toggleCopied(options.copiedStateTimeout);
+        if (options.copiedTimeout) {
+          toggleCopied(options.copiedTimeout);
         }
         if (options.onSuccess) {
           options.onSuccess();
@@ -31,36 +31,19 @@ export function useClipboard(options: UseClipboardOptions = {}) {
       });
   }, []);
 
-  const imperativeCopy = useCallback((text: string) => {
+  const copyHandler = useCallback((text: string) => {
     if (typeof text !== 'string') {
-      if (inputRef.current) {
-        handleCopy(inputRef.current.value);
+      if (targetRef.current) {
+        handleCopy(targetRef.current.value);
       }
     } else {
       handleCopy(text);
     }
   }, []);
 
-  const targetProps = useMemo(() => {
-    return {
-      ref: inputRef,
-    };
-  }, []);
-
-  const triggerProps = useMemo(() => {
-    return {
-      onClick: () => {
-        if (inputRef.current) {
-          handleCopy(inputRef.current.value);
-        }
-      },
-    };
-  }, []);
-
   return {
     copied,
-    copy: imperativeCopy,
-    target: () => targetProps,
-    trigger: () => triggerProps,
+    copy: copyHandler,
+    target: targetRef,
   };
 }

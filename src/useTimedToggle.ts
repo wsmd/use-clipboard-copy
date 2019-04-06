@@ -16,12 +16,7 @@ export function useTimedToggle(
     );
   };
 
-  useEffect(
-    () => () => {
-      clearTimeout(timeoutRef.current);
-    },
-    [],
-  );
+  useEffect(() => () => clearTimeout(timeoutRef.current), []);
 
   return [value, toggleValue];
 }

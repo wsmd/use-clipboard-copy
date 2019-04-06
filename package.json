@@ -15,9 +15,10 @@
     "typecheck": "tsc --noEmit",
     "lint": "tslint --project .",
     "test": "jest",
+    "test:all": "yarn typecheck && yarn lint && yarn test",
     "build": "tsc",
     "prebuild": "rm -rf dist",
-    "prepack": "yarn typecheck && yarn lint && yarn test"
+    "prepack": "yarn test:all && yarn build"
   },
   "files": [
     "dist"

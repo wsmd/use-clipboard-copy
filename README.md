@@ -24,9 +24,8 @@
 - [Getting Started](#getting-started)
 - [Examples](#examples)
   - [Copying Text of Another Target Element](#copying-text-of-another-target-element)
+  - [Copying Text Imperatively (Without a Target Element)](#copying-text-imperatively-without-a-target-element)
   - [Displaying a temporary "copied" state](#displaying-a-temporary-copied-state)
-  - [Copying Text Without a Target Element](#copying-text-without-a-target-element)
-- [API](#api)
 - [Browser Support](#browser-support)
 - [Acknowledgements](#acknowledgements)
 - [License](#license)
@@ -36,7 +35,7 @@
 
 ## Motivation
 
-There are many copy-to-clipboard solutions for Javascript – really good solutions. Some of these solutions can feel out of place when it comes to implementing them with React... they do not feel very _React-y_.
+There are many copy-to-clipboard solutions for Javascript – really good solutions, but some of these them can feel out of place when it comes to implementing getting them to work with React... they do not feel very _React-y_.
 
 `use-clipboard-copy` is a **lightweight** React hook that makes it possible to add a copy-to-clipboard functionality to your user interface with very little code! A simple implementation looks like this:
 
@@ -44,15 +43,15 @@ There are many copy-to-clipboard solutions for Javascript – really good soluti
 function CopyText() {
   const clipboard = useClipboard();
   return (
-    <>
-      <input {...clipboard.target()} />
-      <button {...clipboard.trigger()}>Copy</button>
-    </>
+    <div>
+      <input ref={clipboard.target} />
+      <button onClick={clipboard.copy}>Copy</button>
+    </div>
   );
 }
 ```
 
-P.S. You can still do more with `use-clipboard-copy`. Keep reading!
+P.S. You can do more than that with `use-clipboard-copy`. Keep reading!
 
 ## Getting Started
 
@@ -70,10 +69,10 @@ Please note that `use-clipboard-copy` requires `react@^16.8.0` as a peer depende
 
 ### Copying Text of Another Target Element
 
-A simple copy-to-clipboard interface can consist of two parts:
+A simple copy-to-clipboard interface consists of two parts:
 
-- The target: the element who holds the value to be copied.
-- The trigger: the element that triggers the copy action.
+- The `target`, the element who holds the value to be copied, usually an input.
+- The `copy` action.
 
 ```jsx
 import { useClipboard } from 'use-clipboard-copy';
@@ -82,38 +81,16 @@ export default function PublicUrl({ url }) {
   const clipboard = useClipboard();
   return (
     <div>
-      <input {...clipboard.target()} value={url} readOnly />
-      <button {...clipboard.trigger()}>Copy Shareable Link</button>
+      <input ref={clipboard.target} value={url} readOnly />
+      <button onClick={clipboard.copy}>Copy Shareable Link</button>
     </div>
   );
 }
 ```
 
-### Displaying a temporary "copied" state
+### Copying Text Imperatively (Without a Target Element)
 
-Sometimes it can be helpful to notify users that the text was successfully copied to the clipboard. For example, displaying a temporary "Copied" state after they trigger the copy action.
-
-```jsx
-import { useClipboard } from 'use-clipboard-copy';
-
-export default function PublicUrl({ url }) {
-  const clipboard = useClipboard({
-    copiedTimeout: 600, // timeout duration in milliseconds
-  });
-  return (
-    <div>
-      <input {...clipboard.target()} value={url} readOnly />
-      <button {...clipboard.trigger()}>
-        {clipboard.copied ? 'Copied' : 'Copy Link'}
-      </button>
-    </div>
-  );
-}
-```
-
-### Copying Text Without a Target Element
-
-Some user interfaces might consist of only a simple copy-to-clipboard button without any values displayed to the user.
+A copy-to-clipboard interface might consist of a simple copy button only - without any additional inputs or values displayed to the user. This can be done by passing a string to the `clipboard.copy` action.
 
 <!-- prettier-ignore -->
 ```jsx
@@ -129,7 +106,7 @@ export default function PublicUrl({ url }) {
 }
 ```
 
-Use `clipboard.copy` as a way to perform copy-to-clipboard action imperatively. For example, an async copy-to-clipboard operation would look something like this:
+Use `clipboard.copy` as a way to perform a copy action imperatively. For example, an async copy-to-clipboard operation would look something like this:
 
 <!-- prettier-ignore -->
 ```jsx
@@ -149,9 +126,29 @@ export default function PublicUrl({ id }) {
 }
 ```
 
-## API
+### Displaying a temporary "copied" state
 
-Still under active development...
+Sometimes it can be helpful to notify the user that the text was successfully copied to the clipboard, usually by displaying a temporary "Copied" state after they trigger the copy action.
+
+By passing the `copiedTimeout` option to `useClipboard()`, you can use `clipboard.copied` as a way to toggle the copied state in the UI.
+
+```jsx
+import { useClipboard } from 'use-clipboard-copy';
+
+export default function PublicUrl({ url }) {
+  const clipboard = useClipboard({
+    copiedTimeout: 600, // timeout duration in milliseconds
+  });
+  return (
+    <div>
+      <input ref={clipboard.target} value={url} readOnly />
+      <button onClick={clipboard.copy}>
+        {clipboard.copied ? 'Copied' : 'Copy Link'}
+      </button>
+    </div>
+  );
+}
+```
 
 ## Browser Support
 
