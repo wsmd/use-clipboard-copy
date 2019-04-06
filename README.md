@@ -35,9 +35,9 @@
 
 ## Motivation
 
-There are many copy-to-clipboard solutions for Javascript – really good solutions, but some of these them can feel out of place when it comes to implementing getting them to work with React... they do not feel very _React-y_.
+There are various copy-to-clipboard solutions for Javascript – really good ones, but getting them to work with React can feel a little odd... they don't feel very _React-y_.
 
-`use-clipboard-copy` is a **lightweight** React hook that makes it possible to add a copy-to-clipboard functionality to your user interface with very little code! A simple implementation looks like this:
+`use-clipboard-copy` is a **lightweight** React hook that makes it possible to add a copy-to-clipboard functionality to your React application with very little code! A simple implementation looks like this:
 
 ```js
 function CopyText() {
@@ -55,8 +55,6 @@ P.S. You can do more than that with `use-clipboard-copy`. Keep reading!
 
 ## Getting Started
 
-> _Warning: Please note that this is still under active development. The current API is experimental and likely to change in a future release. Use with caution!_
-
 To get started, add `use-clipboard-copy` to your project:
 
 ```
@@ -71,7 +69,7 @@ Please note that `use-clipboard-copy` requires `react@^16.8.0` as a peer depende
 
 A simple copy-to-clipboard interface consists of two parts:
 
-- The `target`, the element who holds the value to be copied, usually an input.
+- The `target`, an element who holds the value to be copied, usually an input.
 - The `copy` action.
 
 ```jsx
@@ -90,7 +88,7 @@ export default function PublicUrl({ url }) {
 
 ### Copying Text Imperatively (Without a Target Element)
 
-A copy-to-clipboard interface might consist of a simple copy button only - without any additional inputs or values displayed to the user. This can be done by passing a string to the `clipboard.copy` action.
+A copy-to-clipboard interface may consist of a single copy button without any additional inputs or values displayed to the user. By passing a string to the `clipboard.copy` action, the specified string will be copied to the clipboard.
 
 <!-- prettier-ignore -->
 ```jsx
@@ -106,7 +104,7 @@ export default function PublicUrl({ url }) {
 }
 ```
 
-Use `clipboard.copy` as a way to perform a copy action imperatively. For example, an async copy-to-clipboard operation would look something like this:
+Use this as a way to perform a copy action imperatively. For example, an async copy-to-clipboard operation would look something like this:
 
 <!-- prettier-ignore -->
 ```jsx
@@ -118,7 +116,7 @@ export default function PublicUrl({ id }) {
   const handleClick = React.useCallback(async () => {
     const url = await fakeAPI.getShareableLink(id);
     clipboard.copy(url);
-  });
+  }, []);
 
   return (
     <button onClick={handleClick}>Copy Shareable Link</button>
