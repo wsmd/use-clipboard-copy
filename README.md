@@ -11,6 +11,9 @@
   <a href="https://travis-ci.org/wsmd/use-clipboard-copy">
     <img src="https://travis-ci.org/wsmd/use-clipboard-copy.svg?branch=master" alt="CI Build">
   </a>
+  <a href='https://coveralls.io/github/wsmd/use-clipboard-copy?branch=master'>
+    <img src='https://coveralls.io/repos/github/wsmd/use-clipboard-copy/badge.svg?branch=master' alt='Coverage Status' />
+  </a>
   <a href="https://github.com/wsmd/use-clipboard-copy/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/wsmd/use-clipboard-copy.svg" alt="Licence">
   </a>

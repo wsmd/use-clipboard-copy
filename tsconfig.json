@@ -7,8 +7,7 @@
     "esModuleInterop": true,
     "declaration": true,
     "outDir": "dist",
-    "jsx": "react",
-    "noUnusedLocals": true
+    "jsx": "react"
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]
