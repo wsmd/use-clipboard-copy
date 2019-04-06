@@ -10,14 +10,13 @@ interface UseClipboardOptions {
 }
 
 interface ClipboardAPI {
-  copied: boolean;
-  copy: (text?: string) => void;
-  target: React.MutableRefObject<
-    HTMLInputElement | HTMLTextAreaElement | undefined
-  >;
+  readonly copied: boolean;
+  readonly copy: (text?: string | any) => void;
+  readonly isSupported: () => boolean;
+  readonly target: React.RefObject<any>;
 }
 
-export function useClipboard(options: UseClipboardOptions = {}) {
+export function useClipboard(options: UseClipboardOptions = {}): ClipboardAPI {
   const [copied, toggleCopied] = useTimedToggle(false);
 
   const targetRef = useRef<HTMLTextAreaElement | HTMLInputElement>(null);
@@ -39,19 +38,27 @@ export function useClipboard(options: UseClipboardOptions = {}) {
       });
   }, []);
 
-  const copyHandler = useCallback((text?: string | React.SyntheticEvent) => {
-    if (typeof text !== 'string') {
-      if (targetRef.current) {
-        handleCopy(targetRef.current.value);
-      }
-    } else {
+  const copyHandler = useCallback((text?: any) => {
+    if (typeof text === 'string') {
       handleCopy(text);
+    } else if (targetRef.current) {
+      handleCopy(targetRef.current.value);
     }
+  }, []);
+
+  const isSupported = useCallback(() => {
+    return !!(
+      navigator.clipboard ||
+      (document.execCommand &&
+        document.queryCommandSupported &&
+        document.queryCommandSupported('copy'))
+    );
   }, []);
 
   return {
     copied,
     copy: copyHandler,
-    target: targetRef as React.RefObject<any>,
+    isSupported,
+    target: targetRef,
   };
 }

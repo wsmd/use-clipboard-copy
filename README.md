@@ -150,7 +150,22 @@ export default function PublicUrl({ url }) {
 
 ## Browser Support
 
-Chrome, Firefox, Edge, Safari, IE11.
+`use-clipboard-copy` is supported in all browsers that [supports the native clipboard APIs](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Interact_with_the_clipboard), including major browsers such as **Chrome, Firefox, Edge, Safari, IE11**.
+
+In some edge cases, this hook provides an `isSupported` method that you can use to check for browser support and update the UI accordingly:
+
+```jsx
+function ClipboardSupport() {
+  const clipboard = useClipboard();
+  return (
+    <div>
+      {clipboard.isSupported()
+        ? "yay! copy-to-clipboard is supported"
+        : "meh. copy-to-clipboard is not supported"}
+    </div>
+  );
+}
+```
 
 ## Acknowledgements
 
