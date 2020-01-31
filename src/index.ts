@@ -3,7 +3,7 @@ import copy from 'clipboard-copy';
 import { useCallback, useRef } from 'react';
 import { useTimedToggle } from './useTimedToggle';
 
-interface UseClipboardOptions {
+export interface UseClipboardOptions {
   copiedTimeout?: number;
   onSuccess?: () => void;
   onError?: () => void;
@@ -11,7 +11,7 @@ interface UseClipboardOptions {
   selectOnError?: boolean;
 }
 
-interface ClipboardAPI {
+export interface ClipboardAPI {
   readonly copied: boolean;
   readonly copy: (text?: string | any) => void;
   readonly isSupported: () => boolean;
