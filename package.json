@@ -57,7 +57,7 @@
     }
   ],
   "peerDependencies": {
-    "react": "^16.8.0"
+    "react": ">=16.8.0"
   },
   "dependencies": {
     "clipboard-copy": "^3.0.0"
