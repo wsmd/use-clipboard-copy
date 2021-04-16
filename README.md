@@ -8,6 +8,9 @@
   <a href="https://www.npmjs.com/package/use-clipboard-copy">
     <img src="https://img.shields.io/npm/v/use-clipboard-copy.svg" alt="Current Release" />
   </a>
+  <a href="https://www.npmjs.com/package/use-clipboard-copy">
+    <img src="https://badgen.net/npm/dt/use-clipboard-copy" alt="Downloads" />
+  </a>
   <a href="https://travis-ci.org/wsmd/use-clipboard-copy">
     <img src="https://travis-ci.org/wsmd/use-clipboard-copy.svg?branch=master" alt="CI Build">
   </a>
