@@ -9,7 +9,7 @@ Object.defineProperties(document, {
 
 export default jest.fn(
   (text: string) =>
-    new Promise((resolve, reject) => {
+    new Promise<void>((resolve, reject) => {
       try {
         document.execCommand(text);
         resolve();
