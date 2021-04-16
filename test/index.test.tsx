@@ -1,7 +1,7 @@
+import React, { useState } from 'react';
 import clipboardCopy from 'clipboard-copy';
-import React from 'react';
 import { cleanup, renderHook } from 'react-hooks-testing-library';
-import { render } from 'react-testing-library';
+import { render, fireEvent } from 'react-testing-library';
 import { useClipboard } from '../src';
 
 afterEach(() => {
@@ -36,7 +36,7 @@ describe('useClipboard', () => {
     expect(clipboardCopy).toHaveBeenCalledWith('test');
   });
 
-  it('calls onSuccess when copy is successful', done => {
+  it('calls onSuccess when copy is successful', (done) => {
     const onSuccess = jest.fn();
     const { result } = renderHook(() => useClipboard({ onSuccess }));
     render(<input ref={result.current.target} defaultValue="test" />);
@@ -47,7 +47,40 @@ describe('useClipboard', () => {
     });
   });
 
-  it('selects the target input on copy', done => {
+  it('calls onSuccess with latest closure', async () => {
+    const successFn = jest.fn();
+
+    function Component() {
+      const [value, setValue] = useState(0);
+      const { target, copy } = useClipboard({
+        onSuccess: () => successFn(value),
+      });
+      return (
+        <>
+          <input ref={target} />
+          <button data-testid="copy" onClick={copy} />
+          <button data-testid="increment" onClick={() => setValue(value + 1)} />
+        </>
+      );
+    }
+
+    const { findByTestId } = render(<Component />);
+
+    const copyBtn = await findByTestId('copy');
+    const incrementBtn = await findByTestId('increment');
+
+    fireEvent.click(copyBtn as Element);
+    await new Promise(process.nextTick);
+    expect(successFn).toHaveBeenLastCalledWith(0);
+
+    fireEvent.click(incrementBtn as Element);
+
+    fireEvent.click(copyBtn as Element);
+    await new Promise(process.nextTick);
+    expect(successFn).toHaveBeenLastCalledWith(1);
+  });
+
+  it('selects the target input on copy', (done) => {
     const { result } = renderHook(() => useClipboard({ selectOnCopy: true }));
     const { container } = render(
       <input ref={result.current.target} defaultValue="test" />,
@@ -100,7 +133,7 @@ describe('useClipboard', () => {
       commandExec.mockRestore();
     });
 
-    it('calls onError when copy fails', done => {
+    it('calls onError when copy fails', (done) => {
       const onError = jest.fn(() => {
         expect(onError).toHaveBeenCalled();
         done();
@@ -110,7 +143,7 @@ describe('useClipboard', () => {
       result.current.copy();
     });
 
-    it('selects an input on error', done => {
+    it('selects an input on error', (done) => {
       const { result } = renderHook(() => useClipboard());
       const { container } = render(
         <input ref={result.current.target} defaultValue="test" />,
